@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://xcy58.github.io</id>
     <title>__xcy&apos;</title>
-    <updated>2020-11-19T10:36:58.022Z</updated>
+    <updated>2020-11-19T10:42:52.703Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://xcy58.github.io"/>
     <link rel="self" href="https://xcy58.github.io/atom.xml"/>
@@ -16,18 +16,19 @@
         <link href="https://xcy58.github.io/post/Algorithm &amp; Personal circumstances/">
         </link>
         <updated>2020-11-19T10:29:59.000Z</updated>
-        <content type="html"><![CDATA[<ul>
-<li>
-<p><mark>something</mark> 是会的，<mark><s>something</s></mark> 是会大概/一半的</p>
-</li>
-<li>
-<p>基础算法</p>
+        <content type="html"><![CDATA[<h2 id="前言">前言</h2>
+<ul>
+<li><mark>something</mark> 是会的，<mark><s>something</s></mark> 是会大概/一半的</li>
+</ul>
+<h2 id="提高知识点汇总">提高知识点汇总</h2>
+<p>基础知识，<strong>一定要学扎实</strong>，才有可能冲击省队！加油！</p>
+<ul>
+<li>基础算法
 <ul>
 <li><strong><mark>贪心</mark>、<mark>枚举</mark>、<mark>分治</mark>、<mark>二分</mark>、<mark>倍增</mark>、*构造、<mark>高精</mark>、<mark>模拟</mark></strong></li>
 </ul>
 </li>
-<li>
-<p>图论</p>
+<li>图论
 <ul>
 <li>图
 <ul>
@@ -50,8 +51,7 @@
 </li>
 </ul>
 </li>
-<li>
-<p>数论</p>
+<li>数论
 <ul>
 <li><strong><mark>gcd、lcm</mark></strong></li>
 <li><strong><mark>埃氏筛法</mark></strong></li>
@@ -61,8 +61,7 @@
 <li>矩阵</li>
 </ul>
 </li>
-<li>
-<p>数据结构</p>
+<li>数据结构
 <ul>
 <li><strong><mark>链表</mark>、<mark><s>队列（单调队列）</s></mark>、<mark><s>栈（单调栈）</s></mark></strong></li>
 <li><strong><mark>堆</mark>、st表、<mark>hash表</mark></strong></li>
@@ -71,16 +70,14 @@
 <li>*<mark>分块</mark></li>
 </ul>
 </li>
-<li>
-<p>动态规划</p>
+<li>动态规划
 <ul>
 <li><strong><mark>背包DP</mark>、树形DP、<mark>记忆化搜索</mark>、<mark>递推</mark></strong></li>
 <li><strong>区间DP、序列DP</strong></li>
 <li>*<strong>DP优化</strong>（不涉及斜率优化、四边形不等式等等）</li>
 </ul>
 </li>
-<li>
-<p>搜索</p>
+<li>搜索
 <ul>
 <li><strong><mark>暴搜（dfs、bfs）</mark></strong></li>
 <li><strong><mark>搜索的剪枝</mark></strong></li>
@@ -89,8 +86,7 @@
 <li>*随机化搜索</li>
 </ul>
 </li>
-<li>
-<p>其他算法</p>
+<li>其他算法
 <ul>
 <li><strong><mark>STL的基本使用方法</mark></strong></li>
 <li>脑洞的正确使用方法</li>
@@ -100,7 +96,7 @@
 </li>
 </ul>
 <h2 id="省选知识点汇总"><a href="http://blog.csdn.net/loi_dqs/article/details/52076386">省选知识点汇总</a></h2>
-<p>冲省选的，<strong>先把整理的NOIP知识点学扎实，注意一定要学扎实</strong> 加粗是重点，星号是选学 学无止境，欢迎大家继续补充~</p>
+<p>冲省选的，<strong>先把整理的NOIP知识点学扎实，注意一定要学扎实！</strong> 加粗是重点，星号是选学。学无止境！</p>
 <ul>
 <li>图论
 <ul>
