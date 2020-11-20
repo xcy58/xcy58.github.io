@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://xcy58.github.io</id>
     <title>__xcy&apos;</title>
-    <updated>2020-11-19T10:54:11.475Z</updated>
+    <updated>2020-11-20T11:26:59.512Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://xcy58.github.io"/>
     <link rel="self" href="https://xcy58.github.io/atom.xml"/>
@@ -10,6 +10,122 @@
     <logo>https://xcy58.github.io/images/avatar.png</logo>
     <icon>https://xcy58.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, __xcy&apos;</rights>
+    <entry>
+        <title type="html"><![CDATA[浅谈 并查集之模板]]></title>
+        <id>https://xcy58.github.io/post/Find-Union-Set/</id>
+        <link href="https://xcy58.github.io/post/Find-Union-Set/">
+        </link>
+        <updated>2020-11-20T10:16:43.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="并查集-模板">并查集 - 模板</h2>
+<h3 id="需求">需求</h3>
+<ol start="0">
+<li>并查集，顾名思义，就是能 <strong>并(合并)</strong> 能 <strong>查(查询)</strong> 的 <strong>集(集合)</strong></li>
+<li><strong>合并</strong>集合 (一般会给你两个点，需要合并两点所在的集合)</li>
+<li><strong>询问</strong>两点<strong>是否在同一集合</strong>内</li>
+</ol>
+<h3 id="实现">实现</h3>
+<h4 id="思想"><strong>思想</strong></h4>
+<p>并查集是将某些点(可以为一个点)看作一个集合，然后有若干个集合。<br>
+因为我们只是要<strong>合并集合</strong>以及<strong>询问两点是否在同一集合之内</strong>，所以集合内点的顺序是不需要关心的。<br>
+也就是说，在一个集合的点内随便找出一个点作为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>o</mi><mi>o</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">root</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">o</span><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span></span></span></span>，其余点皆是他的儿子，这样就可以将每一个集合储存起来并<strong>为下文做好铺垫</strong>。</p>
+<h4 id="合并"><strong>合并</strong></h4>
+<p>合并极其简单，只需要将两个集合中的一个集合的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>o</mi><mi>o</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">root</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">o</span><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span></span></span></span>作为新集合的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>o</mi><mi>o</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">root</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">o</span><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span></span></span></span>，另一个集合的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>o</mi><mi>o</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">root</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">o</span><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span></span></span></span>则作为新集合<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>o</mi><mi>o</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">root</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">o</span><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span></span></span></span>的儿子。</p>
+<h5 id="code">Code</h5>
+<pre><code class="language-cpp">//......
+
+for(int i=1;i&lt;=n;++i) f[i]=i;
+// 初始化f数组，f[i]记录i的父亲
+// 至于初始话的值，只要你能知道这个值代表ta没有爸爸而且不会与数据冲突就好
+
+//......
+
+int find(int x){
+	if(x==f[x]) return x; // ta没有父亲，所以ta是这个集合的root
+	return find(f[x]); // 接着寻找ta的爸爸所在集合的root (与寻找x所在集合的root等价)
+}
+//这个find()为查找节点x所在集合的root
+
+//......
+
+f[find(x)]=find(y);
+//合并，找到两点所在的集合，让其中的一个root作为另一个root的儿子
+
+//......
+</code></pre>
+<h4 id="询问"><strong>询问</strong></h4>
+<p>询问依旧极其简单，只需要判断两点所在集合的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>o</mi><mi>o</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">root</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">o</span><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span></span></span></span>是否相等，相等则在一个集合内，不相等则在不同的集合内。</p>
+<h5 id="code-2">Code</h5>
+<pre><code class="language-cpp">//......
+
+if(find(x)==find(y)) // 相同，在同一集合内
+    puts(&quot;Y&quot;);
+else // 不相同，不在同一集合内
+    puts(&quot;N&quot;);
+// 判断两点各所在集合的root是否相同
+
+//......
+</code></pre>
+<h4 id="亿些优化"><strong><s>亿些</s>优化</strong></h4>
+<ol>
+<li>在查询的时候，若集合内节点(设节点个数为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>)形成一条链，则查询叶子节点的复杂度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>，那么多次查找则复杂度会爆炸。<br>
+这时候，我们就需要一些优化，显然，我们可以压缩路径，在我们查询一个点(<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>)时，当找到这个集合的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>o</mi><mi>o</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">root</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">o</span><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span></span></span></span>的时候，我们可以直接把<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>作为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>o</mi><mi>o</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">root</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">o</span><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span></span></span></span>的儿子，这样再查询<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>节点的时候，我们就可以使用<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mn>1</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>的复杂度来解决了。</li>
+</ol>
+<pre><code class="language-cpp">   //---Code---
+   //......
+   
+   int find(int x){
+       if(x==f[x]) return x;
+       return (f[x]=find(f[x])); // 这里使用了高(qi)超(ji)技(yin)艺(qiao)，将x的爸爸改为ta所处集合的root，下次查询效率将提升
+   }
+   
+   //......
+</code></pre>
+<ol start="2">
+<li><s>我不会了......</s></li>
+</ol>
+<h3 id="代码">代码</h3>
+<pre><code class="language-cpp">#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;list&gt;
+#include &lt;map&gt;
+#include &lt;set&gt;
+using namespace std;
+#define ull unsigned ll
+#define INF 0x3f3f3f3f
+#define ll long long
+#define GC getchar()
+#define R read()
+ll read(){
+    char c=GC; ll s=0,f=1;
+    while(c&lt;'0'||c&gt;'9'){if(c=='-')f=-f;c=GC;}
+    while(c&gt;='0'&amp;&amp;c&lt;='9'){s=s*10+c-'0';c=GC;}
+    return s*f;
+}
+int n,m;
+int op,x,y; 
+int f[10005];
+int find(int x){ //查询其所在集合的root
+	if(x==f[x]) return x;
+	return (f[x]=find(f[x]));
+}
+int main(){
+	n=R; m=R;
+	for(int i=1;i&lt;=n;++i) f[i]=i; // 初始话
+	for(int i=1;i&lt;=m;++i){
+		op=R; x=R; y=R;
+		if(op==1) f[find(x)]=find(y); // 合并
+		else if(op==2) if(find(x)==find(y)) puts(&quot;Y&quot;); else puts(&quot;N&quot;);  //询问
+	}
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[2020 CSP-S2 游记]]></title>
         <id>https://xcy58.github.io/post/2020-CSP-S2-RecordTheTrip/</id>
