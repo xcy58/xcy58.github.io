@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://xcy58.github.io</id>
     <title>__xcy&apos;</title>
-    <updated>2020-11-21T04:43:42.756Z</updated>
+    <updated>2020-11-21T04:47:17.115Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://xcy58.github.io"/>
     <link rel="self" href="https://xcy58.github.io/atom.xml"/>
@@ -17,9 +17,9 @@
         </link>
         <updated>2020-11-20T10:16:43.000Z</updated>
         <content type="html"><![CDATA[<h2 id="并查集-模板">并查集 - 模板</h2>
+<p>并查集，顾名思义，就是能 <strong>并(合并)</strong> 能 <strong>查(查询)</strong> 的 <strong>集(集合)</strong></p>
 <h3 id="需求">需求</h3>
-<ol start="0">
-<li>并查集，顾名思义，就是能 <strong>并(合并)</strong> 能 <strong>查(查询)</strong> 的 <strong>集(集合)</strong></li>
+<ol>
 <li><strong>合并</strong>集合 (一般会给你两个点，需要合并两点所在的集合)</li>
 <li><strong>询问</strong>两点<strong>是否在同一集合</strong>内</li>
 </ol>
