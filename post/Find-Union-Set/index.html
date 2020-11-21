@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>浅谈 并查集之模板 | __xcy&#39;</title>
-<link rel="shortcut icon" href="https://xcy58.github.io/favicon.ico?v=1605934034795">
+<link rel="shortcut icon" href="https://xcy58.github.io/favicon.ico?v=1605934117824">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://xcy58.github.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="浅谈 并查集之模板 | __xcy&#39; - Atom Feed" href="https://xcy58.github.io/atom.xml">
@@ -30,7 +30,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://xcy58.github.io">
-  <img class="avatar" src="https://xcy58.github.io/images/avatar.png?v=1605934034795" alt="">
+  <img class="avatar" src="https://xcy58.github.io/images/avatar.png?v=1605934117824" alt="">
   </a>
   <h1 class="site-title">
     __xcy&#39;
@@ -126,7 +126,7 @@
 
 for(int i=1;i&lt;=n;++i) f[i]=i;
 // 初始化f数组，f[i]记录i的父亲
-// 至于初始话的值，只要你能知道这个值代表ta没有爸爸而且不会与数据冲突就好
+// 至于初始化的值，只要你能知道这个值代表ta没有爸爸而且不会与数据冲突就好
 
 //......
 
@@ -206,7 +206,7 @@ int find(int x){ //查询其所在集合的root
 }
 int main(){
 	n=R; m=R;
-	for(int i=1;i&lt;=n;++i) f[i]=i; // 初始话
+	for(int i=1;i&lt;=n;++i) f[i]=i; // 初始化
 	for(int i=1;i&lt;=m;++i){
 		op=R; x=R; y=R;
 		if(op==1) f[find(x)]=find(y); // 合并

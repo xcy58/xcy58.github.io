@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://xcy58.github.io</id>
     <title>__xcy&apos;</title>
-    <updated>2020-11-21T04:47:17.115Z</updated>
+    <updated>2020-11-21T04:48:41.128Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://xcy58.github.io"/>
     <link rel="self" href="https://xcy58.github.io/atom.xml"/>
@@ -35,7 +35,7 @@
 
 for(int i=1;i&lt;=n;++i) f[i]=i;
 // 初始化f数组，f[i]记录i的父亲
-// 至于初始话的值，只要你能知道这个值代表ta没有爸爸而且不会与数据冲突就好
+// 至于初始化的值，只要你能知道这个值代表ta没有爸爸而且不会与数据冲突就好
 
 //......
 
@@ -115,7 +115,7 @@ int find(int x){ //查询其所在集合的root
 }
 int main(){
 	n=R; m=R;
-	for(int i=1;i&lt;=n;++i) f[i]=i; // 初始话
+	for(int i=1;i&lt;=n;++i) f[i]=i; // 初始化
 	for(int i=1;i&lt;=m;++i){
 		op=R; x=R; y=R;
 		if(op==1) f[find(x)]=find(y); // 合并
