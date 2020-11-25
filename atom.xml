@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://xcy58.github.io</id>
     <title>__xcy&apos;</title>
-    <updated>2020-11-25T05:42:40.328Z</updated>
+    <updated>2020-11-25T05:45:11.251Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://xcy58.github.io"/>
     <link rel="self" href="https://xcy58.github.io/atom.xml"/>
@@ -20,7 +20,8 @@
 <pre><code class="language-cpp">while(true) puts(&quot; Use 'long long' &quot;);
 </code></pre>
 <h3 id="题目">题目</h3>
-<figure data-type="image" tabindex="1"><img src="https://xcy58.github.io/post-images/1606217126659.png" alt="" loading="lazy"></figure>
+<p><a href="https://www.luogu.com.cn/problem/P4408">Luogu - P4408</a><br>
+<img src="https://xcy58.github.io/post-images/1606217126659.png" alt="" loading="lazy"></p>
 <h3 id="正文"><s>正文</s></h3>
 <p>这题嘛... <s>也挺简单的?</s> 比较水，首先树的直径求一波，然后遍历每个点与直径两端点的简单路径的长度，两条路径长度取个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">min</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span></span></span></span>，然后把每个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">min</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span></span></span></span>取个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">max</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span></span></span></span>。<br>
 <s>然而是听了同机房神仙讲的。</s></p>
