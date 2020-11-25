@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://xcy58.github.io</id>
     <title>__xcy&apos;</title>
-    <updated>2020-11-21T11:51:59.816Z</updated>
+    <updated>2020-11-25T05:42:40.328Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://xcy58.github.io"/>
     <link rel="self" href="https://xcy58.github.io/atom.xml"/>
@@ -10,6 +10,127 @@
     <logo>https://xcy58.github.io/images/avatar.png</logo>
     <icon>https://xcy58.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, __xcy&apos;</rights>
+    <entry>
+        <title type="html"><![CDATA[[题解] Luogu / P4408 / [NOI2003]逃学的小孩]]></title>
+        <id>https://xcy58.github.io/post/Answer-Luogu-P4408/</id>
+        <link href="https://xcy58.github.io/post/Answer-Luogu-P4408/">
+        </link>
+        <updated>2020-11-24T11:08:04.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="前言">前言</h3>
+<pre><code class="language-cpp">while(true) puts(&quot; Use 'long long' &quot;);
+</code></pre>
+<h3 id="题目">题目</h3>
+<figure data-type="image" tabindex="1"><img src="https://xcy58.github.io/post-images/1606217126659.png" alt="" loading="lazy"></figure>
+<h3 id="正文"><s>正文</s></h3>
+<p>这题嘛... <s>也挺简单的?</s> 比较水，首先树的直径求一波，然后遍历每个点与直径两端点的简单路径的长度，两条路径长度取个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">min</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span></span></span></span>，然后把每个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">min</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span></span></span></span>取个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">max</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span></span></span></span>。<br>
+<s>然而是听了同机房神仙讲的。</s></p>
+<h4 id="为什么使用树的直径">为什么使用树的直径?</h4>
+<p>根据规则之一 <strong>Chris的父母总沿着两点间唯一的通路行走</strong> 而且 <strong>最坏情况下Chris的父母要耗费多长时间才能找到Chris</strong> ，我们显然可以知道，一个图上<strong>最长</strong>的两点的路径 (不可能会走不必要走的路径，因为题目说过 <strong>决定在尽量短的时间内</strong> ) 必定是 <mark>树的直径</mark> 。<br>
+那么其中任意两点的距离就是 <strong>树的直径</strong> ，我们这里假设为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A \to B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span></span></span> 。</p>
+<h4 id="那么如何求出c点">那么如何求出C点?</h4>
+<p>首先，我们先顺一下所要走的顺序为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>C</mi><mo>→</mo><mi>A</mi><mo>→</mo><mi>B</mi><mspace width="1em"/><mi>o</mi><mi>r</mi><mspace width="1em"/><mi>C</mi><mo>→</mo><mi>B</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">C \to A \to B \quad or \quad C \to B \to A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span></span></span></span> 。<br>
+也就是说， <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span></span></span></span> 去的地方一定是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span></span></span></span> 或 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span></span></span> 中距离 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span></span></span></span> 最短的点。既然要最费时，那么就要求出最短中的最大，才能得出最佳答案。<br>
+那么！我们只需要对 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span></span></span> 跑一遍最长路， 然后，枚举一下 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span></span></span></span> 点，对每个 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>min</mi><mo>⁡</mo><mo>(</mo><mi>l</mi><mi>e</mi><mi>n</mi><mo>(</mo><mi>C</mi><mo>→</mo><mi>A</mi><mo>)</mo><mo separator="true">,</mo><mi>l</mi><mi>e</mi><mi>n</mi><mo>(</mo><mi>C</mi><mo>→</mo><mi>B</mi><mo>)</mo><mo>)</mo></mrow><annotation encoding="application/x-tex">\min(len(C\to A),len(C\to B))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">min</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">A</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span> 取一遍 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>max</mi><mo>⁡</mo></mrow><annotation encoding="application/x-tex">\max</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mop">max</span></span></span></span> 就好了，C点就是求出最大长度的那个点啦。</p>
+<h4 id="所以答案是什么">所以答案是什么?</h4>
+<p>好！答案就是 <strong>直径的长度+C点与A或B点的长度中最短的长度</strong> 。<br>
+最后！首尾呼应！<code>Use &quot;long long&quot;</code>！<code>Use &quot;long long&quot;</code>！<code>Use &quot;long long&quot;</code>！</p>
+<h3 id="code">Code</h3>
+<pre><code class="language-cpp">#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;list&gt;
+#include &lt;map&gt;
+#include &lt;set&gt;
+#include &lt;utility&gt;
+using namespace std;
+#define reint register int
+#define ull unsigned ll
+#define INF 0x3f3f3f3f
+#define ll long long
+#define GC getchar()
+#define R read()
+ll read(){
+    char c=GC; ll s=0,f=1;
+    while(c&lt;'0'||c&gt;'9'){if(c=='-')f=-f;c=GC;}
+    while(c&gt;='0'&amp;&amp;c&lt;='9'){s=s*10+c-'0';c=GC;}
+    return s*f;
+}
+struct node { ll to,v; };
+node make_node(ll to,ll v) { node t; t.to=to; t.v=v; return t; }
+ll n,m,pluslen;
+vector&lt;node&gt; e[200005],dij[200005];
+ll a,b,len,deep[200005];
+struct Dijkstra{
+    struct nodeDis{
+        ll len,v;
+        bool operator &lt; (const nodeDis &amp;Get) const {
+            return len&gt;Get.len;
+        }
+    };
+    nodeDis make_nodeDis(ll len,ll v){
+        nodeDis t; t.len=len; t.v=v;
+        return t;
+    }
+    priority_queue&lt;nodeDis&gt; q;
+    ll vis[200005],dis[200005];
+    void dijkstra(ll XD){
+        while(!q.empty()) q.pop();
+        for(ll i=1;i&lt;=n;++i) vis[i]=0;
+        for(ll i=1;i&lt;=n;++i) dis[i]=INF;
+        dis[XD]=0; q.push(make_nodeDis(0,XD));
+        while(!q.empty()){
+            ll u=q.top().v; q.pop();
+            if(vis[u]) continue;
+            vis[u]=1;
+            for(ll i=0;i&lt;dij[u].size();++i){
+                ll v=dij[u][i].to,w=dij[u][i].v;
+                if(dis[v]&gt;dis[u]+w&amp;&amp;!vis[v]){
+                    dis[v]=dis[u]+w;
+                    q.push(make_nodeDis(dis[v],v));
+                }
+            }
+        }
+    }
+}x,y;
+//以上是奇怪的dijkstra
+void dfs(ll u,ll fa){
+    if(len&lt;deep[u]) { len=deep[u]; a=u; }
+    for(ll i=0,uLen=e[u].size();i&lt;uLen;++i){
+        ll v=e[u][i].to,w=e[u][i].v;
+        if(v==fa) continue;
+        deep[v]=deep[u]+w; dfs(v,u);
+    }
+}
+//以上是用来求直径的dfs
+int main(){
+    n=R; m=R;
+    for(ll i=1;i&lt;=m;++i){
+        ll u=R,v=R,w=R;
+        e[u].push_back(make_node(v,w));
+        e[v].push_back(make_node(u,w));
+        //为求直径而建图
+        dij[u].push_back(make_node(v,-w));
+        dij[v].push_back(make_node(u,-w));
+        //为跑 dijkstra 而建图
+    }
+    dfs(1,0);
+    memset(deep,0,sizeof(deep)); len=0; b=a;
+    dfs(b,0);
+    //求直径
+    x.dijkstra(a); y.dijkstra(b);
+    for(ll i=1;i&lt;=n;++i)
+        pluslen=max(pluslen,min(-x.dis[i],-y.dis[i]));
+    //最短路&amp;求C点(这里直接求的是C到A或B的最短距离)
+    printf(&quot;%lld&quot;,len+pluslen);
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[浅谈 并查集之模板]]></title>
         <id>https://xcy58.github.io/post/Find-Union-Set/</id>
