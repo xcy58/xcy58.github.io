@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://xcy58.github.io</id>
     <title>__xcy&apos;</title>
-    <updated>2020-12-04T03:53:54.448Z</updated>
+    <updated>2020-12-04T11:48:58.357Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://xcy58.github.io"/>
     <link rel="self" href="https://xcy58.github.io/atom.xml"/>
@@ -10,6 +10,28 @@
     <logo>https://xcy58.github.io/images/avatar.png</logo>
     <icon>https://xcy58.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, __xcy&apos;</rights>
+    <entry>
+        <title type="html"><![CDATA[CSP&NOIP复习板子题]]></title>
+        <id>https://xcy58.github.io/post/cspandnoip-fu-xi-ban-zi-ti/</id>
+        <link href="https://xcy58.github.io/post/cspandnoip-fu-xi-ban-zi-ti/">
+        </link>
+        <updated>2020-12-04T11:31:24.000Z</updated>
+        <content type="html"><![CDATA[<p><a href="https://www.luogu.com.cn/problem/P3367">并查集</a><br>
+<a href="https://www.luogu.com.cn/problem/P4779">单源最短路径-Dijkstra</a><br>
+<a href="https://www.luogu.com.cn/problem/P1226">快速幂</a><br>
+<a href="https://www.luogu.com.cn/problem/P1908">逆序对</a><br>
+<a href="https://www.luogu.com.cn/problem/P3374">树状数组1</a> <a href="https://www.luogu.com.cn/problem/P3368">树状数组2</a><br>
+<a href="https://www.luogu.com.cn/problem/P3383">线性筛</a><br>
+<a href="https://www.luogu.com.cn/problem/P3366">最小生成树-Kruskal</a><br>
+<a href="https://www.luogu.com.cn/problem/P2863">强连通分量-tarjan</a><br>
+<a href="https://www.luogu.com.cn/problem/P3388">割点</a> <a href="https://www.luogu.com.cn/problem/P1656">桥</a><br>
+<a href="https://www.luogu.com.cn/problem/P3370">字符串哈希</a><br>
+<a href="https://www.luogu.com.cn/problem/P3379">LCA-倍增</a><br>
+<a href="https://www.luogu.com.cn/problem/P3372">线段树</a><br>
+<a href="https://www.luogu.com.cn/problem/P1601">高精A+B</a> <a href="https://www.luogu.com.cn/problem/P2142">高精A-B</a> <a href="https://www.luogu.com.cn/problem/P1303">高精A*B</a><br>
+<a href="https://www.luogu.com.cn/problem/P1029">数论-GCD&amp;LCM</a></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[[题解] Luogu / P4408 / [NOI2003]逃学的小孩]]></title>
         <id>https://xcy58.github.io/post/Answer-Luogu-P4408/</id>
