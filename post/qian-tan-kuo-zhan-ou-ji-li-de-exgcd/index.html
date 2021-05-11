@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>浅谈扩展欧几里得(Exgcd) | 忆</title>
-<link rel="shortcut icon" href="https://xcy58.github.io/favicon.ico?v=1620721555061">
+<link rel="shortcut icon" href="https://xcy58.github.io/favicon.ico?v=1620731866579">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://xcy58.github.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="浅谈扩展欧几里得(Exgcd) | 忆 - Atom Feed" href="https://xcy58.github.io/atom.xml">
@@ -12,15 +12,14 @@
 
 
     <meta name="description" content="前言
-真的是浅谈
+假设我们已经会了欧几里得算法
+而且，真真真真的是浅谈
 基本形式
 ax+by=gcd⁡(a,b)ax+by=\gcd(a,b) 
 ax+by=gcd(a,b)
 a,b∈N∗a, b\in \N^* 
 a,b∈N∗
-扩展欧几里得 (Exgcd) 则是求解以上方程的整数解
-求特解
-..." />
+扩展欧几里得 (Exg..." />
     <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -30,7 +29,7 @@ a,b∈N∗
       <div class="main-content">
         <div class="site-header">
   <a href="https://xcy58.github.io">
-  <img class="avatar" src="https://xcy58.github.io/images/avatar.png?v=1620721555061" alt="">
+  <img class="avatar" src="https://xcy58.github.io/images/avatar.png?v=1620731866579" alt="">
   </a>
   <h1 class="site-title">
     忆
@@ -94,7 +93,7 @@ a,b∈N∗
                 2021-05-10
               </span>
               <span>
-                5 min read
+                7 min read
               </span>
               
             </div>
@@ -102,7 +101,8 @@ a,b∈N∗
             <div class="post-content-wrapper">
               <div class="post-content">
                 <h3 id="前言">前言</h3>
-<p>真的是浅谈</p>
+<p>假设我们已经会了欧几里得算法<br>
+而且，真真真真的是浅谈</p>
 <h3 id="基本形式">基本形式</h3>
 <p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>x</mi><mo>+</mo><mi>b</mi><mi>y</mi><mo>=</mo><mi>gcd</mi><mo>⁡</mo><mo>(</mo><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">ax+by=\gcd(a,b) 
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">b</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span style="margin-right:0.01389em;">g</span>cd</span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span><span class="mclose">)</span></span></span></span></span></p>
@@ -167,6 +167,63 @@ y&amp;=&amp;y_1-kd_y
 \end{array}
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.4000000000000004em;vertical-align:-0.9500000000000004em;"></span><span class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.45em;"><span style="top:-3.61em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">x</span></span></span><span style="top:-2.4099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9500000000000004em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.45em;"><span style="top:-3.61em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mrel">=</span></span></span><span style="top:-2.4099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mrel">=</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9500000000000004em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.45em;"><span style="top:-3.61em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-2.4099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9500000000000004em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span></span></span></span></span></span></span></p>
 <p>其中，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> 是任意整数</p>
+<h3 id="例题">例题</h3>
+<p><a href="https://www.luogu.com.cn/problem/P5656">P5656 【模板】二元一次不定方程 (exgcd)</a><br>
+以上我们已经求出通解形式，于是分类讨论即可（注意细节）</p>
+<pre><code class="language-cpp">#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstdio&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;list&gt;
+#include &lt;map&gt;
+#include &lt;set&gt;
+using namespace std;
+#define fore(i,now) for(reg int i=head[now];i;i=e[i].nxt)
+#define fora(i,a,b,c) for(reg int i=a;i&lt;=b;i+=c)
+#define forb(i,a,b,c) for(reg int i=a;i&gt;=b;i-=c)
+#define uLL unsigned LL
+#define INF 0x3f3f3f3f
+#define LL long long
+#define reg register
+#define R read()
+inline LL read(){
+    LL s=0, f=1; char c=getchar();
+    while(c&lt;'0'||c&gt;'9') { if(c=='-') f=-f; c=getchar(); }
+    while(c&gt;='0'&amp;&amp;c&lt;='9') s=(s&lt;&lt;3)+(s&lt;&lt;1)+(c^48), c=getchar();
+    return s*f;
+}
+LL Exgcd(LL a, LL b, LL &amp;x, LL &amp;y){
+    if(b==0) { x=1, y=0; return a; }
+    LL g=Exgcd(b, a%b, x, y);
+    LL t=x; x=y, y=t-(a/b)*y;
+    return g;
+}
+int main(){
+    int T=R; while(T--&gt;0){
+        LL a=R, b=R, c=R, x, y, k;
+        LL g=Exgcd(a, b, x, y);
+        /* 判断有无解 */
+        if(c%g) { puts(&quot;-1&quot;); continue; }
+        /* 求 x1 及 y1 */
+        x*=c/g, y*=c/g; 
+        /* q, p 同 dx, dy */
+        LL q=b/g, p=a/g; 
+        /* 将 x 调整为最小正整数解 */
+        if(x&lt;=0) k=ceil((1.0-x)/q), x+=k*q, y-=k*p;
+        else k=(x-1)/q, x-=k*q, y+=k*p;
+        /* 判断有无正整数解 */
+        if(y&gt;0)
+            /* 根据询问回答即可, (y-1)%p+1 是为了使 y 是正整数 */
+            printf(&quot;%lld %lld %lld %lld %lld\n&quot;, (y-1)/p+1, x, (y-1)%p+1, x+(y-1)/p*q, y);
+        else
+            printf(&quot;%lld %lld\n&quot;, x, y+(LL)ceil((1.0-y)/p)*p);
+    }
+    return 0;
+}
+</code></pre>
 <h3 id="后记">后记</h3>
 <p>参考 <a href="https://www.luogu.com.cn/blog/dengyaotriangle/solution-p5656">dengyaotriangle 的博客 - 题解 P5656 【【模板】二元一次不定方程(exgcd)】</a></p>
 
@@ -181,6 +238,7 @@ y&amp;=&amp;y_1-kd_y
 <li><a href="#%E5%9F%BA%E6%9C%AC%E5%BD%A2%E5%BC%8F">基本形式</a></li>
 <li><a href="#%E6%B1%82%E7%89%B9%E8%A7%A3">求特解</a></li>
 <li><a href="#%E6%A0%B9%E6%8D%AE%E7%89%B9%E8%A7%A3%E6%B1%82%E9%80%9A%E8%A7%A3">根据特解求通解</a></li>
+<li><a href="#%E4%BE%8B%E9%A2%98">例题</a></li>
 <li><a href="#%E5%90%8E%E8%AE%B0">后记</a></li>
 </ul>
 </li>
