@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="ProblemLink. Solution考虑维护连续的路灯的状态，支持修改，询问区间最左&#x2F;右边的 0，可以使用线段树，当然 \tt{set} 也可以（但是我 \tt{T} 了\tt{&#x2F;kk}。 考虑维护一个 N\times N 的矩阵，表示从第 i 个路灯到第 j 个路灯是否联通。 这里考虑使用预处理答案的方式，(i,\ j) 表示从 0 时刻到目前有多少次联通，并加上 q-t，其中 q 指总时">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【题解】【APIO2019】路灯">
+<meta property="og:url" content="http://xcy58.github.io/2021/12/20/solution%20road%20light/index.html">
+<meta property="og:site_name" content="xcy58">
+<meta property="og:description" content="ProblemLink. Solution考虑维护连续的路灯的状态，支持修改，询问区间最左&#x2F;右边的 0，可以使用线段树，当然 \tt{set} 也可以（但是我 \tt{T} 了\tt{&#x2F;kk}。 考虑维护一个 N\times N 的矩阵，表示从第 i 个路灯到第 j 个路灯是否联通。 这里考虑使用预处理答案的方式，(i,\ j) 表示从 0 时刻到目前有多少次联通，并加上 q-t，其中 q 指总时">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-12-20T11:25:47.295Z">
+<meta property="article:author" content="xcy58">
+<meta property="article:tag" content="题解">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>【题解】【APIO2019】路灯</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/projects_url">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2021/12/07/solution%20xor%20zongzi/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://xcy58.github.io/2021/12/20/solution%20road%20light/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://xcy58.github.io/2021/12/20/solution%20road%20light/&text=【题解】【APIO2019】路灯"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://xcy58.github.io/2021/12/20/solution%20road%20light/&title=【题解】【APIO2019】路灯"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://xcy58.github.io/2021/12/20/solution%20road%20light/&is_video=false&description=【题解】【APIO2019】路灯"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=【题解】【APIO2019】路灯&body=Check out this article: http://xcy58.github.io/2021/12/20/solution%20road%20light/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://xcy58.github.io/2021/12/20/solution%20road%20light/&title=【题解】【APIO2019】路灯"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://xcy58.github.io/2021/12/20/solution%20road%20light/&title=【题解】【APIO2019】路灯"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://xcy58.github.io/2021/12/20/solution%20road%20light/&title=【题解】【APIO2019】路灯"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://xcy58.github.io/2021/12/20/solution%20road%20light/&title=【题解】【APIO2019】路灯"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://xcy58.github.io/2021/12/20/solution%20road%20light/&name=【题解】【APIO2019】路灯&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://xcy58.github.io/2021/12/20/solution%20road%20light/&t=【题解】【APIO2019】路灯"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Problem"><span class="toc-number">1.</span> <span class="toc-text">Problem</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Solution"><span class="toc-number">2.</span> <span class="toc-text">Solution</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Code"><span class="toc-number">3.</span> <span class="toc-text">Code</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        【题解】【APIO2019】路灯
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">xcy58</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-12-19T16:00:00.000Z" itemprop="datePublished">2021-12-20</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5445">Link</a>.</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>考虑维护连续的路灯的状态，支持修改，询问区间最左/右边的 <script type="math/tex">0</script>，可以使用线段树，当然 <script type="math/tex">\tt{set}</script> 也可以（但是我 <script type="math/tex">\tt{T}</script> 了<script type="math/tex">\tt{/kk}</script>。</p>
+<p>考虑维护一个 <script type="math/tex">N\times N</script> 的矩阵，表示从第 <script type="math/tex">i</script> 个路灯到第 <script type="math/tex">j</script> 个路灯是否联通。</p>
+<p>这里考虑使用预处理答案的方式，<script type="math/tex">(i,\ j)</script> 表示从 <script type="math/tex">0</script> 时刻到目前有多少次联通，并加上 <script type="math/tex">q-t</script>，其中 <script type="math/tex">q</script> 指总时刻，<script type="math/tex">t</script> 指当前时刻。</p>
+<p>所以当查询时，用 <script type="math/tex">(i,\ j)</script> 减去 <script type="math/tex">q-t</script> 即是答案。</p>
+<p>修改时，如果连接了左右两边的联通块（指极长的一段连续的 <script type="math/tex">1</script>），则将对应的矩阵加上 <script type="math/tex">q-t</script>，否则减去 <script type="math/tex">q-t</script>。注意一下之前已经处理过的答案就不需要修改了。</p>
+<p>对应矩阵上的操作我们可以使用树套树或 <script type="math/tex">\tt{CDQ}</script> 分治。</p>
+<p>这里用的是树状数组套动态开点线段树。</p>
+<p>注意开 <script type="math/tex">\tt{O2}</script>，不然会被卡。</p>
+<p><del>据说这道题树套树可以被卡空间。</del></p>
+<h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;random&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">namespace</span> FastIO &#123;</span><br><span class="line">    <span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">in</span><span class="params">(T &amp;s)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> f=<span class="number">1</span>; <span class="keyword">char</span> c=<span class="built_in">getchar</span>(); s=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(c)) &#123; <span class="keyword">if</span>(c==<span class="string">&#x27;-&#x27;</span>) f=-f; c=<span class="built_in">getchar</span>(); &#125;</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">isdigit</span>(c)) s=(s&lt;&lt;<span class="number">3</span>)+(s&lt;&lt;<span class="number">1</span>)+(c^<span class="number">48</span>), c=<span class="built_in">getchar</span>();</span><br><span class="line">        s*=f;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">out</span><span class="params">(T s)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(s&lt;<span class="number">0</span>) <span class="built_in">putchar</span>(<span class="string">&#x27;-&#x27;</span>), s=-s;</span><br><span class="line">        <span class="keyword">if</span>(s&gt;<span class="number">9</span>) <span class="built_in">out</span>(s/<span class="number">10</span>);</span><br><span class="line">        <span class="built_in">putchar</span>(<span class="string">&#x27;0&#x27;</span>+s%<span class="number">10</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">outc</span><span class="params">(T s, <span class="keyword">char</span> c=<span class="string">&#x27;\n&#x27;</span>)</span> </span>&#123; <span class="built_in">out</span>(s), <span class="built_in">putchar</span>(c); &#125;;</span><br><span class="line">&#125; <span class="keyword">using</span> <span class="keyword">namespace</span> FastIO;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(x) (x&amp;(-x))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rint register int</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rs (o&lt;&lt;1|1)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ls (o&lt;&lt;1)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> uLL;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF=<span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> _=<span class="number">5</span>, N=<span class="number">3e5</span>+_, M=<span class="number">4e7</span>+_;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m, tot, cnt, s[N];</span><br><span class="line"><span class="keyword">char</span> op[<span class="number">7</span>];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">segnode</span> &#123;</span> <span class="keyword">int</span> l, r, sm; <span class="built_in">segnode</span> () &#123; l=r=sm=<span class="number">0</span>; &#125;  &#125; tr[M];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">tree</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> rot;</span><br><span class="line">    <span class="built_in">tree</span> () &#123; rot=<span class="number">0</span>; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">pushup</span><span class="params">(<span class="keyword">const</span> rint o)</span> </span>&#123; tr[o].sm=tr[tr[o].l].sm+tr[tr[o].r].sm; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">modify</span><span class="params">(rint &amp;o, <span class="keyword">const</span> rint l, <span class="keyword">const</span> rint r, <span class="keyword">const</span> rint u, <span class="keyword">const</span> rint v)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!o) o=++cnt;</span><br><span class="line">        <span class="keyword">if</span>(l==r) &#123; tr[o].sm+=v; <span class="keyword">return</span> ; &#125;</span><br><span class="line">        rint mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(u&lt;=mid) <span class="built_in">modify</span>(tr[o].l, l, mid, u, v);</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">modify</span>(tr[o].r, mid+<span class="number">1</span>, r, u, v);</span><br><span class="line">        <span class="built_in">pushup</span>(o);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">qry</span><span class="params">(<span class="keyword">const</span> rint o, <span class="keyword">const</span> rint l, <span class="keyword">const</span> rint r, <span class="keyword">const</span> rint u)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(r&lt;=u) <span class="keyword">return</span> tr[o].sm;</span><br><span class="line">        rint ans=<span class="number">0</span>; <span class="keyword">const</span> rint mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        ans+=<span class="built_in">qry</span>(tr[o].l, l, mid, u);</span><br><span class="line">        <span class="keyword">if</span>(u&gt;mid) ans+=<span class="built_in">qry</span>(tr[o].r, mid+<span class="number">1</span>, r, u);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; t[N];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">segtree</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> &#123;</span></span><br><span class="line">        <span class="keyword">int</span> l, r;</span><br><span class="line">    &#125; t[N&lt;&lt;<span class="number">2</span>];</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">pushup</span><span class="params">(<span class="keyword">const</span> rint o)</span> </span>&#123; t[o].l=<span class="built_in">min</span>(t[ls].l, t[rs].l), t[o].r=<span class="built_in">max</span>(t[ls].r, t[rs].r); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">modify</span><span class="params">(<span class="keyword">const</span> rint o, <span class="keyword">const</span> rint l, <span class="keyword">const</span> rint r, <span class="keyword">const</span> rint u, <span class="keyword">const</span> rint v)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(l==r)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!v) t[o].l=t[o].r=u;</span><br><span class="line">            <span class="keyword">else</span> t[o].l=n+<span class="number">1</span>, t[o].r=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> rint mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(u&lt;=mid) <span class="built_in">modify</span>(ls, l, mid, u, v);</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">modify</span>(rs, mid+<span class="number">1</span>, r, u, v);</span><br><span class="line">        <span class="built_in">pushup</span>(o);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">qryl</span><span class="params">(<span class="keyword">const</span> rint o, <span class="keyword">const</span> rint l, <span class="keyword">const</span> rint r, <span class="keyword">const</span> rint u, <span class="keyword">const</span> rint v)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(u&gt;v) <span class="keyword">return</span> n+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(u&lt;=l&amp;&amp;r&lt;=v) <span class="keyword">return</span> t[o].l;</span><br><span class="line">        rint ans=n+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">const</span> rint mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(u&lt;=mid) ans=<span class="built_in">min</span>(ans, <span class="built_in">qryl</span>(ls, l, mid, u, v));</span><br><span class="line">        <span class="keyword">if</span>(v&gt;mid) ans=<span class="built_in">min</span>(ans, <span class="built_in">qryl</span>(rs, mid+<span class="number">1</span>, r, u, v));</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">qryr</span><span class="params">(<span class="keyword">const</span> rint o, <span class="keyword">const</span> rint l, <span class="keyword">const</span> rint r, <span class="keyword">const</span> rint u, <span class="keyword">const</span> rint v)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(u&gt;v) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(u&lt;=l&amp;&amp;r&lt;=v) <span class="keyword">return</span> t[o].r;</span><br><span class="line">        rint ans=<span class="number">0</span>; <span class="keyword">const</span> rint mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(u&lt;=mid) ans=<span class="built_in">max</span>(ans, <span class="built_in">qryr</span>(ls, l, mid, u, v));</span><br><span class="line">        <span class="keyword">if</span>(v&gt;mid) ans=<span class="built_in">max</span>(ans, <span class="built_in">qryr</span>(rs, mid+<span class="number">1</span>, r, u, v));</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">const</span> rint o, <span class="keyword">const</span> rint l, <span class="keyword">const</span> rint r)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(l==r) &#123; t[o].l=t[o].r=l; <span class="keyword">return</span> ; &#125;</span><br><span class="line">        <span class="keyword">const</span> rint mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="built_in">build</span>(ls, l, mid), <span class="built_in">build</span>(rs, mid+<span class="number">1</span>, r);</span><br><span class="line">        <span class="built_in">pushup</span>(o);</span><br><span class="line">    &#125;</span><br><span class="line">&#125; sg;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(rint p, <span class="keyword">const</span> rint q, <span class="keyword">const</span> rint v)</span> </span>&#123; <span class="keyword">while</span>(p&lt;=n) t[p].<span class="built_in">modify</span>(t[p].rot, <span class="number">1</span>, n+<span class="number">1</span>, q, v), p+=<span class="built_in">lowbit</span>(p); &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span>  <span class="keyword">int</span> <span class="title">qry</span><span class="params">(rint p, <span class="keyword">const</span> rint q)</span> </span>&#123; rint s=<span class="number">0</span>; <span class="keyword">while</span>(p) s+=t[p].<span class="built_in">qry</span>(t[p].rot, <span class="number">1</span>, n+<span class="number">1</span>, q), p^=<span class="built_in">lowbit</span>(p); <span class="keyword">return</span> s; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">rect</span><span class="params">(<span class="keyword">const</span> rint l, <span class="keyword">const</span> rint r, <span class="keyword">const</span> rint v)</span> </span>&#123; <span class="built_in">add</span>(l, l, v), <span class="built_in">add</span>(l, r+<span class="number">1</span>, -v), <span class="built_in">add</span>(r+<span class="number">1</span>, l, -v), <span class="built_in">add</span>(r+<span class="number">1</span>, r+<span class="number">1</span>, v); &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">rect</span><span class="params">(<span class="keyword">const</span> rint l, <span class="keyword">const</span> rint r, <span class="keyword">const</span> rint x, <span class="keyword">const</span> rint y, <span class="keyword">const</span> rint v)</span> </span>&#123; <span class="built_in">add</span>(l, x, v), <span class="built_in">add</span>(l, y+<span class="number">1</span>, -v), <span class="built_in">add</span>(r+<span class="number">1</span>, x, -v), <span class="built_in">add</span>(r+<span class="number">1</span>, y+<span class="number">1</span>, v); &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">in</span>(n), <span class="built_in">in</span>(m);</span><br><span class="line">    sg.<span class="built_in">build</span>(<span class="number">1</span>, <span class="number">1</span>, n);</span><br><span class="line">    s[++tot]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(rint i=<span class="number">1</span>; i&lt;=n; ++i)&#123;</span><br><span class="line">        rint a; <span class="built_in">scanf</span>(<span class="string">&quot;%1d&quot;</span>, &amp;a);</span><br><span class="line">        <span class="keyword">if</span>(a) sg.<span class="built_in">modify</span>(<span class="number">1</span>, <span class="number">1</span>, n, i, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">else</span> s[++tot]=i;</span><br><span class="line">    &#125;</span><br><span class="line">    s[++tot]=n+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(rint i=<span class="number">2</span>; i&lt;=tot; ++i)&#123;</span><br><span class="line">        <span class="keyword">if</span>(s[i<span class="number">-1</span>]+<span class="number">1</span>==s[i]) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="built_in">rect</span>(s[i<span class="number">-1</span>]+<span class="number">1</span>, s[i]<span class="number">-1</span>, m);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(rint i=<span class="number">1</span>; i&lt;=m; ++i)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, op+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span>(op[<span class="number">1</span>]==<span class="string">&#x27;t&#x27;</span>)&#123;</span><br><span class="line">            rint x, l, r, ad; <span class="built_in">in</span>(x);</span><br><span class="line">            l=sg.<span class="built_in">qryr</span>(<span class="number">1</span>, <span class="number">1</span>, n, <span class="number">1</span>, x<span class="number">-1</span>);</span><br><span class="line">            r=sg.<span class="built_in">qryl</span>(<span class="number">1</span>, <span class="number">1</span>, n, x, n);</span><br><span class="line">            <span class="keyword">if</span>(r==x) r=sg.<span class="built_in">qryl</span>(<span class="number">1</span>, <span class="number">1</span>, n, x+<span class="number">1</span>, n), sg.<span class="built_in">modify</span>(<span class="number">1</span>, <span class="number">1</span>, n, x, <span class="number">1</span>), ad=m-i;</span><br><span class="line">            <span class="keyword">else</span> sg.<span class="built_in">modify</span>(<span class="number">1</span>, <span class="number">1</span>, n, x, <span class="number">0</span>), ad=i-m;</span><br><span class="line">            <span class="built_in">rect</span>(x, r<span class="number">-1</span>, l+<span class="number">1</span>, x, ad);</span><br><span class="line">            <span class="built_in">rect</span>(l+<span class="number">1</span>, x, x, r<span class="number">-1</span>, ad);</span><br><span class="line">            <span class="built_in">rect</span>(x, x, x, x, -ad);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            rint x, y; <span class="built_in">in</span>(x), <span class="built_in">in</span>(y), --y;</span><br><span class="line">            <span class="keyword">const</span> rint q=sg.<span class="built_in">qryl</span>(<span class="number">1</span>, <span class="number">1</span>, n, x, n);</span><br><span class="line">            <span class="built_in">outc</span>(<span class="built_in">qry</span>(x, y)-((q&gt;y)?(m-i):(<span class="number">0</span>)));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Problem"><span class="toc-number">1.</span> <span class="toc-text">Problem</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Solution"><span class="toc-number">2.</span> <span class="toc-text">Solution</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Code"><span class="toc-number">3.</span> <span class="toc-text">Code</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://xcy58.github.io/2021/12/20/solution%20road%20light/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://xcy58.github.io/2021/12/20/solution%20road%20light/&text=【题解】【APIO2019】路灯"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://xcy58.github.io/2021/12/20/solution%20road%20light/&title=【题解】【APIO2019】路灯"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://xcy58.github.io/2021/12/20/solution%20road%20light/&is_video=false&description=【题解】【APIO2019】路灯"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=【题解】【APIO2019】路灯&body=Check out this article: http://xcy58.github.io/2021/12/20/solution%20road%20light/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://xcy58.github.io/2021/12/20/solution%20road%20light/&title=【题解】【APIO2019】路灯"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://xcy58.github.io/2021/12/20/solution%20road%20light/&title=【题解】【APIO2019】路灯"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://xcy58.github.io/2021/12/20/solution%20road%20light/&title=【题解】【APIO2019】路灯"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://xcy58.github.io/2021/12/20/solution%20road%20light/&title=【题解】【APIO2019】路灯"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://xcy58.github.io/2021/12/20/solution%20road%20light/&name=【题解】【APIO2019】路灯&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://xcy58.github.io/2021/12/20/solution%20road%20light/&t=【题解】【APIO2019】路灯"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2021
+    xcy58
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/projects_url">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
